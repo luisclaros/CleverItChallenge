@@ -1,0 +1,28 @@
+Ejercicio 3 Explicación de tecnicas
+===============================================
+
+
+ejercicio 1:
+
+Usé pairwise testing, para tomar una muestra representativa asignando los pares de combinaciones y poder obtener una combinatoria adecuada.
+Esta combinatoria debe obtenerse de los parametros country, city y fecha, con sus diferentes valores posibles
+
+Ejercicio 2:
+
+Usé Postman con tests que prueban distintos aspectos del las request
+Como validar los json,como por ejemplo verificar que los email tengan formato valido
+
+
+
+Además de cuales son los puntos a tener en cuenta cuando probamos una API:
+
+Los puntos a tener en cuenta para probar una api deben ir de lo mas general a lo mas especifico
+es decir, el orden ideal de verificacion primero deberia tener los aspectos no funcionales y luego los funcionales
+
+-Codigo de respuesta
+-Tiempo de respuesta (estos son comunes a todos los endpoints)
+-Json parseable
+-estructura del json
+-estructura  internar del json, contenga los elementos correctos
+-por ultimo controlar los valores de las propiedades especifico del json de respuesta, como tipos de datos, validacion de los valores, etc.
+

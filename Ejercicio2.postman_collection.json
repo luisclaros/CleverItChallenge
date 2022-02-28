@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "60894270-4d3f-4e53-860b-95c1b78a35fb",
+		"name": "Ejercicio2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Coments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let respuesta=pm.response.json();\r",
+							"let emailReg=/^(([^<>()[\\]\\\\.,;:\\s@\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/\r",
+							"const hasEmailFormat = (currentValue) => currentValue.email.match(emailReg);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check Email format of all items\", function () {\r",
+							"pm.expect(respuesta.every(hasEmailFormat)).to.be.true;  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check body is a string\", function () {\r",
+							"pm.expect(respuesta[0].body).to.be.a('string'); \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check name is a string\", function () {\r",
+							"pm.expect(respuesta[0].name).to.be.a('string'); \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check messaje body is larger than name\", function () {\r",
+							"pm.expect(respuesta[0].body.length).to.be.gt(respuesta[0].name.length)\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/comments",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Albums",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let respuesta=pm.response.json();\r",
+							"let solicitud= JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.test(\"check Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check title is a string\", function () {\r",
+							"pm.expect(respuesta.title).to.be.a('string'); \r",
+							"});\r",
+							"pm.test(\"Check user id is a number\", function () {\r",
+							"pm.expect(respuesta.userId).to.be.a('number'); \r",
+							"});\r",
+							"pm.test(\"Check album id is a number\", function () {\r",
+							"pm.expect(respuesta.id).to.be.a('number'); \r",
+							"});\r",
+							"pm.test(\"Check title is not empty\", function () {\r",
+							"pm.expect(respuesta.title).to.not.be.empty;\r",
+							"});\r",
+							"pm.test(\"Check title is the same as the request title\", function () {\r",
+							"pm.expect(respuesta.title).to.be.equal(solicitud.title); \r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"userId\": {{userId}},\r\n        \"title\": \"{{title}}\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/albums",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"albums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const isGreatherThanZero = (currentValue) => currentValue.id > 0;\r",
+							"let emailReg=/^(([^<>()[\\]\\\\.,;:\\s@\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/\r",
+							"let urlReg=/^((https?|ftp|smtp):\\/\\/)?(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*$/\r",
+							"let respuesta=pm.response.json();\r",
+							"const hasEmailFormat = (currentValue) => currentValue.email.match(emailReg);\r",
+							"\r",
+							"\r",
+							"pm.test(\"check Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check Email format of all items\", function () {\r",
+							"pm.expect(respuesta.every(hasEmailFormat)).to.be.true;  \r",
+							"});\r",
+							"pm.test(\"Check URL format\", function () {\r",
+							"pm.expect(respuesta[0].website).match(urlReg)     \r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check user id is a number\", function () {\r",
+							"pm.expect(respuesta[0].id).to.be.a('number'); \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check user id is a string\", function () {\r",
+							"pm.expect(respuesta[0].id).to.be.a('number'); \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check all users id are greather than zero\", function () {\r",
+							"pm.expect(respuesta.every(isGreatherThanZero)).to.be.true; \r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
