@@ -19,6 +19,9 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
+							"pm.test(\"Check quantity\", function () {\r",
+							"pm.expect(respuesta.length).to.be.equal(500); \r",
+							"});\r",
 							"\r",
 							"pm.test(\"Check Email format of all items\", function () {\r",
 							"pm.expect(respuesta.every(hasEmailFormat)).to.be.true;  \r",
@@ -45,12 +48,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://jsonplaceholder.typicode.com/comments",
-					"protocol": "https",
+					"raw": "{{baseurl}}/comments",
 					"host": [
-						"jsonplaceholder",
-						"typicode",
-						"com"
+						"{{baseurl}}"
 					],
 					"path": [
 						"comments"
@@ -109,12 +109,9 @@
 					}
 				},
 				"url": {
-					"raw": "https://jsonplaceholder.typicode.com/albums",
-					"protocol": "https",
+					"raw": "{{baseurl}}/albums",
 					"host": [
-						"jsonplaceholder",
-						"typicode",
-						"com"
+						"{{baseurl}}"
 					],
 					"path": [
 						"albums"
@@ -139,6 +136,9 @@
 							"\r",
 							"pm.test(\"check Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check quantity\", function () {\r",
+							"pm.expect(respuesta.length).to.be.equal(10); \r",
 							"});\r",
 							"\r",
 							"pm.test(\"Check Email format of all items\", function () {\r",
@@ -170,12 +170,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://jsonplaceholder.typicode.com/users",
-					"protocol": "https",
+					"raw": "{{baseurl}}/users",
 					"host": [
-						"jsonplaceholder",
-						"typicode",
-						"com"
+						"{{baseurl}}"
 					],
 					"path": [
 						"users"
